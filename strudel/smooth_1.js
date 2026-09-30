@@ -1,4 +1,4 @@
-// @title: Smoth
+// @title: All my Smooth
 // @artist: negotrucky
 // @bpm: 120
 
