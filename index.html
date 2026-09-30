@@ -1,0 +1,736 @@
+<!doctype html>
+
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Strudel Experiments</title>
+
+  <!-- Tailwind CDN -->
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Font -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          boxShadow: {
+            neon: '0 0 20px rgba(34,211,238,.15)',
+            'neon-strong': '0 0 25px rgba(34,211,238,.35)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background:
+        radial-gradient(
+          circle at 50% -20%,
+          rgba(34, 211, 238, 0.10),
+          transparent 45%
+        ),
+        #05070b;
+    }
+
+    .scanlines {
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,.015) 1px,
+          transparent 1px
+        );
+      background-size: 100% 4px;
+      pointer-events: none;
+    }
+
+    .glow {
+      text-shadow:
+        0 0 8px rgba(34,211,238,.8),
+        0 0 25px rgba(34,211,238,.35);
+    }
+
+    .card {
+      transition:
+        transform .15s ease,
+        border-color .15s ease,
+        box-shadow .15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(34,211,238,.5);
+      box-shadow: 0 0 25px rgba(34,211,238,.12);
+    }
+  </style>
+
+</head>
+
+<body class="min-h-screen text-slate-300 font-mono">
+
+  <div class="scanlines fixed inset-0 z-50"></div>
+
+  <main class="relative max-w-5xl mx-auto px-6 py-12">
+
+```
+<!-- HEADER -->
+<header class="mb-12">
+
+  <pre class="text-[7px] sm:text-[10px] md:text-xs text-cyan-400 glow leading-tight overflow-hidden mb-8">
+```
+
+███████╗████████╗██████╗ ██╗   ██╗██████╗ ███████╗██╗
+██╔════╝╚══██╔══╝██╔══██╗██║   ██║██╔══██╗██╔════╝██║
+███████╗   ██║   ██████╔╝██║   ██║██████╔╝█████╗  ██║
+╚════██║   ██║   ██╔══██╗██║   ██║██╔══██╗██╔══╝  ██║
+███████║   ██║   ██║  ██║╚██████╔╝██║  ██║███████╗███████╗
+╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝ </pre>
+
+```
+  <div class="flex items-center gap-3 mb-3">
+    <span class="w-2 h-2 bg-cyan-400 rounded-full shadow-[0_0_12px_#22d3ee]"></span>
+
+    <h1 class="text-2xl md:text-3xl font-bold text-white">
+      STRUDEL EXPERIMENTS
+    </h1>
+  </div>
+
+  <p class="text-slate-500 text-sm">
+    // experimental music / live coding / things that probably shouldn't work
+  </p>
+
+</header>
+
+
+<!-- SEARCH -->
+<section class="mb-8">
+
+  <div class="relative">
+
+    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-500">
+      &gt;_
+    </span>
+
+    <input
+      id="search"
+      type="search"
+      placeholder="search experiments..."
+      class="w-full bg-slate-950/70 border border-slate-800
+             focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500
+             outline-none rounded-lg py-3 pl-12 pr-4
+             text-sm text-white placeholder-slate-600
+             shadow-neon"
+    >
+
+  </div>
+
+</section>
+
+
+<!-- STATUS -->
+<div
+  id="status"
+  class="mb-6 text-xs text-slate-600"
+>
+  <span class="text-cyan-500">●</span>
+  scanning repository...
+</div>
+
+
+<!-- SONG LIST -->
+<section
+  id="songs"
+  class="grid gap-4"
+></section>
+
+
+<!-- FOOTER -->
+<footer class="mt-16 pt-6 border-t border-slate-900 text-xs text-slate-600">
+
+  <div class="flex flex-col sm:flex-row justify-between gap-3">
+
+    <span>
+      github://negotrucky/StrudelExperiment
+    </span>
+
+    <a
+      href="https://strudel.cc/"
+      target="_blank"
+      rel="noopener"
+      class="text-cyan-600 hover:text-cyan-400 transition"
+    >
+      strudel.cc ↗
+    </a>
+
+  </div>
+
+  <p class="mt-3">
+    Strudel is free/open-source software.
+  </p>
+
+</footer>
+```
+
+  </main>
+
+<script>
+
+const CONFIG = {
+  owner: 'negotrucky',
+  repo: 'StrudelExperiment',
+  branch: 'main',
+  folder: 'smoothJ',
+};
+
+
+// ------------------------------------------------------------
+// GitHub API
+// ------------------------------------------------------------
+
+const API_URL =
+  `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${CONFIG.folder}?ref=${CONFIG.branch}`;
+
+const RAW_BASE =
+  `https://raw.githubusercontent.com/${CONFIG.owner}/${CONFIG.repo}/${CONFIG.branch}/${CONFIG.folder}/`;
+
+
+// ------------------------------------------------------------
+// DOM
+// ------------------------------------------------------------
+
+const songsContainer = document.getElementById('songs');
+const statusElement = document.getElementById('status');
+const searchInput = document.getElementById('search');
+
+let songs = [];
+
+
+// ------------------------------------------------------------
+// Helpers
+// ------------------------------------------------------------
+
+function escapeHtml(value) {
+
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+
+}
+
+
+function slugFromFilename(filename) {
+
+  return filename
+    .replace(/\.js$/i, '')
+    .replace(/\s+/g, '-')
+    .toLowerCase();
+
+}
+
+
+function parseMetadata(code, filename) {
+
+  const metadata = {};
+
+  const lines = code.split('\n').slice(0, 30);
+
+  for (const line of lines) {
+
+    const match = line.match(
+      /^\s*\/\/\s*@(\w+)\s*:\s*(.*?)\s*$/
+    );
+
+    if (match) {
+      metadata[match[1].toLowerCase()] = match[2];
+    }
+
+  }
+
+  return {
+    title: metadata.title || filename.replace(/\.js$/i, ''),
+    artist: metadata.artist || '',
+    bpm: metadata.bpm || '',
+  };
+
+}
+
+
+// ------------------------------------------------------------
+// Strudel URL
+// ------------------------------------------------------------
+
+function encodeStrudel(code) {
+
+  // Strudel stores the source in the URL hash as base64.
+  const bytes = new TextEncoder().encode(code);
+
+  let binary = '';
+
+  for (const byte of bytes) {
+    binary += String.fromCharCode(byte);
+  }
+
+  const base64 = btoa(binary);
+
+  return `https://strudel.cc/#${encodeURIComponent(base64)}`;
+
+}
+
+
+function shortUrl(filename) {
+
+  const url = new URL(window.location.href);
+
+  url.search = '';
+  url.hash = '';
+
+  url.searchParams.set(
+    'play',
+    slugFromFilename(filename)
+  );
+
+  return url.toString();
+
+}
+
+
+// ------------------------------------------------------------
+// Load a file
+// ------------------------------------------------------------
+
+async function loadSongCode(song) {
+
+  const response = await fetch(
+    `${RAW_BASE}${encodeURIComponent(song.name)}`
+  );
+
+  if (!response.ok) {
+    throw new Error(`Unable to load ${song.name}`);
+  }
+
+  return await response.text();
+
+}
+
+
+// ------------------------------------------------------------
+// PLAY
+// ------------------------------------------------------------
+
+async function playSong(song) {
+
+  try {
+
+    statusElement.innerHTML =
+      `<span class="text-cyan-400">●</span> loading ${escapeHtml(song.name)}...`;
+
+    const code = await loadSongCode(song);
+
+    const url = encodeStrudel(code);
+
+    window.location.href = url;
+
+  } catch (error) {
+
+    console.error(error);
+
+    statusElement.innerHTML =
+      `<span class="text-red-400">●</span> unable to load song`;
+
+  }
+
+}
+
+
+// ------------------------------------------------------------
+// COPY LINK
+// ------------------------------------------------------------
+
+async function copyLink(song) {
+
+  const url = shortUrl(song.name);
+
+  try {
+
+    await navigator.clipboard.writeText(url);
+
+    const button = document.querySelector(
+      `[data-copy="${CSS.escape(song.name)}"]`
+    );
+
+    if (button) {
+
+      const original = button.textContent;
+
+      button.textContent = 'COPIED!';
+
+      setTimeout(() => {
+        button.textContent = original;
+      }, 1200);
+
+    }
+
+  } catch {
+
+    prompt('Copy this link:', url);
+
+  }
+
+}
+
+
+// ------------------------------------------------------------
+// Render
+// ------------------------------------------------------------
+
+function renderSongs(filter = '') {
+
+  const query = filter.trim().toLowerCase();
+
+  const filtered = songs.filter(song => {
+
+    return (
+      song.metadata.title.toLowerCase().includes(query) ||
+      song.name.toLowerCase().includes(query) ||
+      song.metadata.artist.toLowerCase().includes(query)
+    );
+
+  });
+
+
+  songsContainer.innerHTML = filtered.map(song => {
+
+    const title = escapeHtml(song.metadata.title);
+    const filename = escapeHtml(song.name);
+    const artist = escapeHtml(song.metadata.artist);
+    const bpm = escapeHtml(song.metadata.bpm);
+
+    return `
+      <article
+        class="
+          card
+          bg-slate-950/60
+          border border-slate-800
+          rounded-xl
+          p-5
+        "
+      >
+
+        <div class="flex flex-col md:flex-row md:items-center gap-5">
+
+          <div class="flex-1 min-w-0">
+
+            <div class="flex items-center gap-3">
+
+              <span class="text-cyan-400 text-lg">♪</span>
+
+              <h2 class="text-white font-bold truncate">
+                ${title}
+              </h2>
+
+            </div>
+
+
+            <div class="mt-2 flex flex-wrap gap-3 text-xs text-slate-600">
+
+              <span>
+                ${filename}
+              </span>
+
+              ${
+                artist
+                  ? `<span class="text-purple-400">@ ${artist}</span>`
+                  : ''
+              }
+
+              ${
+                bpm
+                  ? `<span class="text-cyan-700">${bpm} BPM</span>`
+                  : ''
+              }
+
+            </div>
+
+          </div>
+
+
+          <div class="flex gap-2">
+
+            <button
+              onclick="playSong(songs.find(s => s.name === '${filename.replaceAll("'", "\\'")}'))"
+              class="
+                px-5 py-2.5
+                rounded-lg
+                bg-cyan-400
+                hover:bg-cyan-300
+                text-slate-950
+                font-bold
+                text-xs
+                transition
+                shadow-[0_0_15px_rgba(34,211,238,.25)]
+              "
+            >
+              ▶ PLAY
+            </button>
+
+
+            <button
+              data-copy="${filename}"
+              onclick="copyLink(songs.find(s => s.name === '${filename.replaceAll("'", "\\'")}'))"
+              class="
+                px-4 py-2.5
+                rounded-lg
+                border border-slate-700
+                hover:border-cyan-500
+                hover:text-cyan-400
+                text-slate-500
+                text-xs
+                transition
+              "
+              title="Copy short link"
+            >
+              🔗
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+    `;
+
+  }).join('');
+
+
+  if (!filtered.length) {
+
+    songsContainer.innerHTML = `
+      <div class="text-center py-16 text-slate-700">
+        no experiments found...
+      </div>
+    `;
+
+  }
+
+}
+
+
+// ------------------------------------------------------------
+// Load repository
+// ------------------------------------------------------------
+
+async function loadRepository() {
+
+  try {
+
+    const response = await fetch(API_URL);
+
+    if (!response.ok) {
+      throw new Error(`GitHub API error ${response.status}`);
+    }
+
+    const files = await response.json();
+
+
+    const jsFiles = files.filter(file =>
+      file.type === 'file' &&
+      file.name.toLowerCase().endsWith('.js')
+    );
+
+
+    songs = [];
+
+
+    // Load metadata from each JS file.
+    for (const file of jsFiles) {
+
+      try {
+
+        const code = await loadSongCode(file);
+
+        songs.push({
+          ...file,
+          metadata: parseMetadata(code, file.name),
+        });
+
+      } catch (error) {
+
+        console.warn(
+          `Could not read ${file.name}`,
+          error
+        );
+
+        songs.push({
+          ...file,
+          metadata: {
+            title: file.name.replace(/\.js$/i, ''),
+            artist: '',
+            bpm: '',
+          },
+        });
+
+      }
+
+    }
+
+
+    // Alphabetical order
+    songs.sort((a, b) =>
+      a.metadata.title.localeCompare(
+        b.metadata.title,
+        'fr'
+      )
+    );
+
+
+    statusElement.innerHTML =
+      `<span class="text-cyan-400">●</span> ${songs.length} experiments`;
+
+
+    renderSongs();
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    statusElement.innerHTML = `
+      <span class="text-red-400">●</span>
+      unable to access repository
+    `;
+
+  }
+
+}
+
+
+// ------------------------------------------------------------
+// Search
+// ------------------------------------------------------------
+
+searchInput.addEventListener('input', () => {
+
+  renderSongs(searchInput.value);
+
+});
+
+
+// ------------------------------------------------------------
+// Short link → Strudel
+// ------------------------------------------------------------
+
+async function handlePlayRoute() {
+
+  const params = new URLSearchParams(
+    window.location.search
+  );
+
+  const play = params.get('play');
+
+  if (!play) {
+    return false;
+  }
+
+
+  try {
+
+    const response = await fetch(API_URL);
+
+    if (!response.ok) {
+      throw new Error('GitHub API unavailable');
+    }
+
+    const files = await response.json();
+
+
+    const file = files.find(item =>
+      item.type === 'file' &&
+      item.name.toLowerCase().endsWith('.js') &&
+      slugFromFilename(item.name) === play.toLowerCase()
+    );
+
+
+    if (!file) {
+      throw new Error(`Song not found: ${play}`);
+    }
+
+
+    const code = await loadSongCode(file);
+
+    window.location.replace(
+      encodeStrudel(code)
+    );
+
+
+    return true;
+
+  } catch (error) {
+
+    console.error(error);
+
+    document.body.innerHTML = `
+      <main class="min-h-screen flex items-center justify-center p-8">
+
+        <div class="text-center">
+
+          <div class="text-red-400 text-2xl mb-4">
+            ERROR
+          </div>
+
+          <p class="text-slate-500">
+            Experiment not found.
+          </p>
+
+          <a
+            href="${window.location.pathname}"
+            class="inline-block mt-6 text-cyan-400 hover:text-cyan-300"
+          >
+            ← back
+          </a>
+
+        </div>
+
+      </main>
+    `;
+
+    return true;
+
+  }
+
+}
+
+
+// ------------------------------------------------------------
+// INIT
+// ------------------------------------------------------------
+
+(async () => {
+
+  const isPlayRoute = await handlePlayRoute();
+
+  if (!isPlayRoute) {
+    await loadRepository();
+  }
+
+})();
+
+</script>
+
+</body>
+</html>
