@@ -5,8 +5,8 @@ import re
 from pathlib import Path
 from urllib.parse import quote
 
-ROOT = Path(__file__).resolve().parent.parent
-MUSIC_DIR = ROOT / "smoothJ"
+ROOT = Path(__file__).resolve().parent
+MUSIC_DIR = ROOT / "strudel"
 OUTPUT = ROOT / "songs.json"
 
 STRUDEL_BASE = "https://strudel.cc/#"
