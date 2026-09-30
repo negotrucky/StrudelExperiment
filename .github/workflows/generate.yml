@@ -1,0 +1,38 @@
+name: Generate Strudel catalogue
+
+on:
+  push:
+    paths:
+      - "smoothJ/**/*.js"
+      - "smoothJ/*.js"
+      - "generate.py"
+      - ".github/workflows/generate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate songs.json
+        run: python3 generate.py
+
+      - name: Commit generated catalogue
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add songs.json
+
+          if git diff --cached --quiet; then
+            echo "songs.json is already up to date."
+          else
+            git commit -m "chore: update Strudel catalogue"
+            git push
+          fi
