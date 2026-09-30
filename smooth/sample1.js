@@ -1,7 +1,7 @@
 
 setcps(100/60/4)
 
-// ---------- p1 (calme) : Cm7 Fm7 A#7 D#maj7 ----------  (de test1_15_v3, montee)
+// ---------- p1 (calme) : Cm7 Fm7 A#7 D#maj7 ----------
 const arp_p1 = "<[c4 d#4 g4 a#4]*2 [c4 d#4 f4 g#4]*2 [d4 f4 g#4 a#4]*2 [d4 d#4 g4 a#4]*2>"
 const basse_p1 = "<[c3 ~ ~ ~ ~ ~ ~ ~] [f2 ~ ~ ~ ~ ~ ~ ~] [a#2 ~ ~ ~ ~ ~ ~ ~] [d#3 ~ ~ ~ ~ ~ ~ ~]>"
 const batterie_p1 = "<[bd ~ ~ ~ ~ ~ ~ ~ rim ~ ~ ~ ~ ~ ~ ~] [bd ~ ~ ~ ~ ~ ~ ~ rim ~ ~ ~ ~ ~ ~ ~] [bd ~ ~ ~ ~ ~ ~ ~ rim ~ ~ ~ ~ ~ ~ ~] [bd ~ ~ ~ ~ ~ ~ ~ rim ~ ~ ~ ~ ~ ~ ~]>"
@@ -10,7 +10,7 @@ const doublure_p1 = "<~>"
 const lead_p1 = "<[~@8 d#5@8] [c5@4 d#5@4 d#5@8] [d5@8 a#4@4 d#5@4] [~@8 g5@8]>"
 const nappe_p1 = "<[g3,a#3,d#4,g4] [g#3,c4,d#4,g#4] [f3,g#3,d4,f4] [g3,a#3,d4,g4]>"
 
-// ---------- p2 (moyen) : Cm7 Fm7 A#7 D#maj7 ----------  (de test1_15_v3, couplet)
+// ---------- p2 (moyen) : Cm7 Fm7 A#7 D#maj7 ----------
 const arp_p2 = "<[c4 d#4 g4 a#4]*2 [c4 d#4 f4 g#4]*2 [d4 f4 g#4 a#4]*2 [d4 d#4 g4 a#4]*2>"
 const basse_p2 = "<[c3 g3 c4 g3]*2 [f2 c3 f3 c3]*2 [a#2 f3 a#3 f3]*2 [d#3 a#3 d#4 a#3]*2>"
 const batterie_p2 = "<[bd ~ ~ bd ~ ~ ~ bd ~ bd bd ~ ~ ~ ~ ~, ~ ~ ~ ~ [sd,cp] ~ ~ ~ ~ ~ ~ ~ [sd,cp] ~ ~ ~, hh ~ hh ~ hh ~ hh ~ hh ~ oh ~ hh ~ hh ~] [bd ~ ~ bd ~ ~ ~ bd ~ bd bd ~ ~ ~ ~ ~, ~ ~ ~ ~ [sd,cp] ~ ~ ~ ~ ~ ~ ~ [sd,cp] ~ ~ ~, hh ~ hh ~ hh ~ hh ~ hh ~ oh ~ hh ~ hh ~] [bd ~ ~ bd ~ ~ ~ bd ~ bd bd ~ ~ ~ ~ ~, ~ ~ ~ ~ [sd,cp] ~ ~ ~ ~ ~ ~ ~ [sd,cp] ~ ~ ~, hh ~ hh ~ hh ~ hh ~ hh ~ oh ~ hh ~ hh ~] [bd ~ ~ bd ~ ~ ~ bd ~ bd bd ~ ~ ~ ~ ~, ~ ~ ~ ~ [sd,cp] ~ ~ ~ ~ ~ ~ ~ [sd,cp] ~ ~ ~, hh ~ hh ~ hh ~ hh ~ hh ~ oh ~ hh ~ hh ~, [~ ~ ~ [ht mt lt lt]]]>"
@@ -19,7 +19,7 @@ const doublure_p2 = "<[~@4 d#6@4 c6@2 d#6@2 d6@4] [d#6@4 c6@2 d#6@6 g6@4] [~@4 d
 const lead_p2 = "<[~@4 d#5@4 c5@2 d#5@2 d5@4] [d#5@4 c5@2 d#5@6 g5@4] [~@4 d#5@4 a#4@2 d#5@3 f5@3] [g5@8 a#4@8]>"
 const nappe_p2 = "<[g3,a#3,d#4,g4] [g#3,c4,d#4,g#4] [f3,g#3,d4,f4] [g3,a#3,d4,g4]>"
 
-// ---------- p3 (fort) : Cm7 Fm7 A#7 D#maj7 ----------  (de test1_15_v3, refrain)
+// ---------- p3 (fort) : Cm7 Fm7 A#7 D#maj7 ----------
 const arp_p3 = "<[c4 d#4 g4 a#4]*4 [c4 d#4 f4 g#4]*4 [d4 f4 g#4 a#4]*4 [d4 d#4 g4 a#4]*4>"
 const basse_p3 = "<[c3 g3 c4 g3]*2 [f2 c3 f3 c3]*2 [a#2 f3 a#3 f3]*2 [d#3 a#3 d#4 a#3]*2>"
 const batterie_p3 = "<[bd ~ ~ bd ~ ~ ~ bd ~ bd bd ~ ~ ~ ~ ~, ~ ~ ~ ~ [sd,cp] ~ ~ ~ ~ ~ ~ ~ [sd,cp] ~ ~ ~, hh ~ oh ~ hh ~ oh ~ hh ~ oh ~ hh ~ oh ~] [bd ~ ~ bd ~ ~ ~ bd ~ bd bd ~ ~ ~ ~ ~, ~ ~ ~ ~ [sd,cp] ~ ~ ~ ~ ~ ~ ~ [sd,cp] ~ ~ ~, hh ~ oh ~ hh ~ oh ~ hh ~ oh ~ hh ~ oh ~] [bd ~ ~ bd ~ ~ ~ bd ~ bd bd ~ ~ ~ ~ ~, ~ ~ ~ ~ [sd,cp] ~ ~ ~ ~ ~ ~ ~ [sd,cp] ~ ~ ~, hh ~ oh ~ hh ~ oh ~ hh ~ oh ~ hh ~ oh ~] [bd ~ ~ bd ~ ~ ~ bd ~ bd bd ~ ~ ~ ~ ~, ~ ~ ~ ~ [sd,cp] ~ ~ ~ ~ ~ ~ ~ [sd,cp] ~ ~ ~, hh ~ oh ~ hh ~ oh ~ hh ~ oh ~ hh ~ oh ~, [~ ~ ~ [ht mt lt lt]]]>"
@@ -28,7 +28,7 @@ const doublure_p3 = "<[~@4 g6@4 d#6@2 g6@2 f6@4] [g#6@4 d#6@2 g6@2 g#6@4 a#6@4] 
 const lead_p3 = "<[~@4 g5@4 d#5@2 g5@2 f5@4] [g#5@4 d#5@2 g5@2 g#5@4 a#5@4] [~@4 f5@4 d5@2 f5@2 d#5@4] [g5@4 d#5@2 g5@2 a#5@8]>"
 const nappe_p3 = "<[g3,a#3,d#4,g4] [g#3,c4,d#4,g#4] [f3,g#3,d4,f4] [g3,a#3,d4,g4]>"
 
-// ---------- p4 (fort) : Cm Fm G# G ----------  (de test1_15_v23, refrain)
+// ---------- p4 (fort) : Cm Fm G# G ----------
 const arp_p4 = "<[c4 d#4 g4 c5]*4 [c4 f4 g#4 c5]*4 [c4 d#4 g#4 c5]*4 [d4 g4 b4 d5]*4>"
 const basse_p4 = "<[c3 g3 c4 g3]*2 [f2 c3 f3 c3]*2 [g#2 d#3 g#3 d#3]*2 [g2 d3 g3 d3]*2>"
 const batterie_p4 = "<[bd ~ ~ bd ~ ~ ~ bd ~ bd bd ~ ~ ~ ~ ~, ~ ~ ~ ~ [sd,cp] ~ ~ ~ ~ ~ ~ ~ [sd,cp] ~ ~ ~, hh ~ oh ~ hh ~ oh ~ hh ~ oh ~ hh ~ oh ~] [bd ~ ~ bd ~ ~ ~ bd ~ bd bd ~ ~ ~ ~ ~, ~ ~ ~ ~ [sd,cp] ~ ~ ~ ~ ~ ~ ~ [sd,cp] ~ ~ ~, hh ~ oh ~ hh ~ oh ~ hh ~ oh ~ hh ~ oh ~] [bd ~ ~ bd ~ ~ ~ bd ~ bd bd ~ ~ ~ ~ ~, ~ ~ ~ ~ [sd,cp] ~ ~ ~ ~ ~ ~ ~ [sd,cp] ~ ~ ~, hh ~ oh ~ hh ~ oh ~ hh ~ oh ~ hh ~ oh ~] [bd ~ ~ bd ~ ~ ~ bd ~ bd bd ~ ~ ~ ~ ~, ~ ~ ~ ~ [sd,cp] ~ ~ ~ ~ ~ ~ ~ [sd,cp] ~ ~ ~, hh ~ oh ~ hh ~ oh ~ hh ~ oh ~ hh ~ oh ~, [~ ~ ~ [ht mt lt lt]]]>"
@@ -37,7 +37,7 @@ const doublure_p4 = "<[d#6@2 f6 g6@3 d#6@4 f6@2 g6@4] [f6@4 g6@2 a#6@8 ~@2] [d#6
 const lead_p4 = "<[d#5@2 f5 g5@3 d#5@4 f5@2 g5@4] [f5@4 g5@2 a#5@8 ~@2] [d#5@2 f5 g5@3 d#5@4 f5@4 g5@2] [g5@6 g5@2 b5@8]>"
 const nappe_p4 = "<[g3,d#4,g4] [g#3,c4,g#4,c5] [c4,d#4,c5] [b3,d4,b4]>"
 
-// ---------- p5 (calme) : D# G# Cm G ----------  (de test1_15_v19, pont)
+// ---------- p5 (calme) : D# G# Cm G ----------
 const arp_p5 = "<[d#4 g4 a#4 d#5]*2 [c4 d#4 g#4 c5]*2 [c4 d#4 g4 c5]*2 [d4 g4 b4 d5]*2>"
 const basse_p5 = "<[d#3 ~ ~ ~ ~ ~ ~ ~] [g#2 ~ ~ ~ ~ ~ ~ ~] [c3 ~ ~ ~ ~ ~ ~ ~] [g2 ~ ~ ~ ~ ~ ~ ~]>"
 const batterie_p5 = "<~>"
@@ -47,25 +47,25 @@ const lead_p5 = "<[~@8 d#5@8] [c5@4 d#5@4 d#5@8] [d#5@8 c5@4 d#5@4] [~@8 g5@8]>"
 const nappe_p5 = "<[g3,a#3,g4,a#4] [c4,d#4,c5] [g3,d#4,g4] [b3,d4,b4]>"
 
 stack(
-  // mélodie (la partition du jeu) : gm_clavinet
+  // mélodie
   note(arrange([4, lead_p1], [4, lead_p2], [4, lead_p3], [4, lead_p4], [4, lead_p5]))
     .s("gm_clavinet:1").sustain(0).release(0.3).decay(0.6).gain(1.20).room(0.3).delay(0.3).delaytime(0.450).delayfeedback(0.35),
 
-  // contre-chant : gm_voice_oohs
+  // contre-chant
   note(arrange([4, contre_p1], [4, contre_p2], [4, contre_p3], [4, contre_p4], [4, contre_p5])).s("gm_voice_oohs:3").attack(0.2).sustain(0.9).release(0.8).gain(0.66).pan(0.35).room(0.4),
 
-  // doublure : gm_clarinet (la mélodie à l'octave, version riche seulement)
+  // doublure
   note(arrange([4, doublure_p1], [4, doublure_p2], [4, doublure_p3], [4, doublure_p4], [4, doublure_p5])).s("gm_clarinet:4").attack(0.04).sustain(0.9).release(0.3).gain(0.56).pan(0.6).room(0.4),
 
-  // nappe : gm_pad_warm
+  // nappe
   note(arrange([4, nappe_p1], [4, nappe_p2], [4, nappe_p3], [4, nappe_p4], [4, nappe_p5])).s("gm_pad_warm:3").attack(0.3).sustain(0.9).release(1).gain(0.45).pan(0.3).room(0.6),
 
-  // basse : gm_electric_bass_pick
+  // basse
   note(arrange([4, basse_p1], [4, basse_p2], [4, basse_p3], [4, basse_p4], [4, basse_p5])).s("gm_electric_bass_pick:1").decay(0.3).sustain(0.6).release(0.1).gain(1.27),
 
-  // arpège : gm_lead_5_charang
+  // arpège
   note(arrange([4, arp_p1], [4, arp_p2], [4, arp_p3], [4, arp_p4], [4, arp_p5])).s("gm_lead_5_charang:1").gain(0.45).pan(0.7).room(0.4),
 
-  // batterie : RolandTR909
+  // batterie
   s(arrange([4, batterie_p1], [4, batterie_p2], [4, batterie_p3], [4, batterie_p4], [4, batterie_p5])).bank("RolandTR909").gain(0.8).room(0.2)
 )
