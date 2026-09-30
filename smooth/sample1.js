@@ -1,3 +1,6 @@
+// @title: Smoth
+// @artist: negotrucky
+// @bpm: 120
 
 setcps(100/60/4)
 
