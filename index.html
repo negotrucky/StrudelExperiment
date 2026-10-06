@@ -1,359 +1,113 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Strudel Experiments</title>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            mono: ["JetBrains Mono", "monospace"]
-          }
-        }
-      }
-    }
-  </script>
-
-  <style>
-    html {
-      background: #05070b;
-    }
-
-    body {
-      background:
-        radial-gradient(circle at 50% -10%, rgba(34,211,238,.12), transparent 45%),
-        radial-gradient(circle at 90% 30%, rgba(168,85,247,.08), transparent 35%),
-        #05070b;
-    }
-
-    .scanlines {
-      background-image: linear-gradient(
-        rgba(255,255,255,.012) 1px,
-        transparent 1px
-      );
-      background-size: 100% 4px;
-      pointer-events: none;
-    }
-
-    .glow {
-      text-shadow:
-        0 0 8px rgba(34,211,238,.85),
-        0 0 25px rgba(34,211,238,.35);
-    }
-
-    .card {
-      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(34,211,238,.45);
-      box-shadow: 0 0 25px rgba(34,211,238,.10);
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Strudel Experiments</title>
+<link rel="icon" href="assets/images/favicon.ico">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050914;--panel:#07101e;--text:#d7f7ff;--muted:#62819a;--cyan:#18dfff;--magenta:#ff19c8;--line:#15304a}
+html[data-theme=light]{--bg:#eef5fb;--panel:#fff;--text:#102746;--muted:#607997;--cyan:#008fd0;--magenta:#e000aa;--line:#c4d8e9}
+html{background:var(--bg);color-scheme:dark}html[data-theme=light]{color-scheme:light}
+body{min-height:100vh;background:radial-gradient(circle at 70% -15%,rgba(24,223,255,.10),transparent 34%),var(--bg);color:var(--text);font-family:"JetBrains Mono",monospace}
+.scanlines{position:fixed;inset:0;z-index:50;pointer-events:none;opacity:.28;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px);background-size:100% 4px}
+.pixel{font-family:"Press Start 2P",monospace}
+.header-line{height:2px;background:linear-gradient(90deg,var(--cyan) 0 72%,transparent 72% 76%,var(--magenta) 76% 82%,transparent 82%)}
+.card{position:relative;background:linear-gradient(135deg,var(--panel),color-mix(in srgb,var(--panel) 75%,var(--cyan)));border:1px solid var(--accent);transition:.15s}
+.card:hover{transform:translateY(-2px);box-shadow:0 0 24px color-mix(in srgb,var(--accent) 18%,transparent)}
+.card:before{content:"";position:absolute;left:-1px;top:-1px;width:38px;height:38px;background:linear-gradient(135deg,var(--accent) 0 48%,transparent 49%)}
+.card:after{content:"";position:absolute;right:-1px;bottom:-1px;width:15px;height:15px;background:linear-gradient(315deg,var(--accent) 0 45%,transparent 46%)}
+.pixel-btn{border:1px solid currentColor;clip-path:polygon(0 6px,6px 0,calc(100% - 6px) 0,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0 calc(100% - 6px));transition:.15s}
+.pixel-btn:hover{filter:brightness(1.25);box-shadow:0 0 14px currentColor}
+.search{border:1px solid var(--cyan);background:var(--panel);clip-path:polygon(0 7px,7px 0,calc(100% - 7px) 0,100% 7px,100% calc(100% - 7px),calc(100% - 7px) 100%,7px 100%,0 calc(100% - 7px))}
+.theme{border:1px solid var(--cyan);background:var(--panel)}
+.theme button{width:34px;height:28px}.theme .active{background:var(--magenta);color:white;box-shadow:0 0 12px rgba(255,25,200,.35)}
+</style>
+<script>
+(()=>{const t=localStorage.getItem("strudel-theme");if(t)document.documentElement.dataset.theme=t})()
+</script>
 </head>
+<body>
+<div class="scanlines"></div>
+<main class="relative z-10 max-w-5xl mx-auto px-5 sm:px-7 py-8 sm:py-12">
+<header class="mb-9">
+<div class="flex items-center gap-4 sm:gap-5">
+<img src="assets/images/logo.webp" alt="Strudel Experiments" class="w-12 h-12 sm:w-14 sm:h-14 shrink-0">
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between gap-4">
+<div>
+<h1 class="pixel text-[15px] sm:text-xl md:text-2xl">STRUDEL EXPERIMENTS</h1>
+<p class="mt-3 text-xs sm:text-sm text-[var(--cyan)]">// experimental music / live coding</p>
+</div>
+<div class="theme shrink-0 rounded-md p-0.5 flex">
+<button id="light" title="Light theme">☼</button><button id="dark" title="Dark theme">◐</button>
+</div>
+</div></div></div>
+<div class="header-line mt-5"></div>
+</header>
 
-<body class="min-h-screen text-slate-300 font-mono">
+<section class="mb-7">
+<div class="search flex items-center gap-3 px-4 py-3">
+<span class="text-[var(--cyan)]">&gt;_</span>
+<input id="search" type="search" placeholder="search experiments..." autocomplete="off" class="bg-transparent outline-none w-full text-sm">
+</div>
+</section>
 
-  <div class="scanlines fixed inset-0 z-50"></div>
+<div id="status" class="mb-5 text-[10px] sm:text-xs text-[var(--muted)]">● loading catalogue...</div>
+<section id="songs" class="grid gap-4"></section>
 
-  <main class="relative max-w-5xl mx-auto px-6 py-12">
-
-    <header class="mb-12">
-      <pre class="text-[6px] sm:text-[9px] md:text-xs text-cyan-400 glow leading-tight overflow-hidden mb-8">
- ███████╗████████╗██████╗ ██╗   ██╗███████╗██╗
- ██╔════╝╚══██╔══╝██╔══██╗██║   ██║██╔════╝██║
- ███████╗   ██║   ██████╔╝██║   ██║█████╗  ██║
- ╚════██║   ██║   ██╔══██╗██║   ██║██╔══╝  ██║
- ███████║   ██║   ██║  ██║╚██████╔╝███████╗███████╗
- ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝
-      </pre>
-
-      <div class="flex items-center gap-3 mb-3">
-        <span class="w-2 h-2 bg-cyan-400 rounded-full shadow-[0_0_12px_#22d3ee]"></span>
-        <h1 class="text-2xl md:text-3xl font-bold text-white">
-          STRUDEL EXPERIMENTS
-        </h1>
-      </div>
-
-      <p class="text-slate-500 text-sm">
-        // experimental music / live coding / things that probably shouldn't work
-      </p>
-    </header>
-
-    <section class="mb-8">
-      <div class="relative">
-        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-500">&gt;_</span>
-
-        <input
-          id="search"
-          type="search"
-          placeholder="search experiments..."
-          class="w-full bg-slate-950/70 border border-slate-800
-                 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500
-                 outline-none rounded-lg py-3 pl-12 pr-4
-                 text-sm text-white placeholder-slate-600"
-        >
-      </div>
-    </section>
-
-    <div id="status" class="mb-6 text-xs text-slate-600">
-      <span class="text-cyan-500">●</span> loading catalogue...
-    </div>
-
-    <section id="songs" class="grid gap-4"></section>
-
-    <footer class="mt-16 pt-6 border-t border-slate-900 text-xs text-slate-600">
-      <div class="flex flex-col sm:flex-row justify-between gap-3">
-        <span>github://negotrucky/StrudelExperiment</span>
-
-        <a
-          href="https://strudel.cc/"
-          target="_blank"
-          rel="noopener"
-          class="text-cyan-600 hover:text-cyan-400 transition"
-        >
-          strudel.cc ↗
-        </a>
-      </div>
-    </footer>
-
-  </main>
+<footer class="mt-12 pt-5 border-t border-[var(--line)] flex flex-col sm:flex-row justify-between gap-3 text-[10px] sm:text-xs text-[var(--muted)]">
+<span>GITHUB://NEGOTRUCKY/STRUDELEXPERIMENT</span>
+<a href="https://strudel.cc/" target="_blank" rel="noopener" class="hover:text-[var(--cyan)]">STRUDEL.CC ↗</a>
+</footer>
+</main>
 
 <script>
-const songsContainer = document.getElementById("songs");
-const statusElement = document.getElementById("status");
-const searchInput = document.getElementById("search");
+const box=document.getElementById("songs"),status=document.getElementById("status"),search=document.getElementById("search");
+let songs={}; const accents=["#ff19c8","#18dfff","#24e58a","#ffd42a"];
+const esc=v=>String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+const shortUrl=k=>{const u=new URL(location.href);u.search="";u.hash="";u.searchParams.set("play",k);return u.toString()};
 
-let songs = {};
-
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+function render(filter=""){
+ const q=filter.trim().toLowerCase();
+ const list=Object.entries(songs).filter(([k,s])=>
+   k.toLowerCase().includes(q)||String(s.title||"").toLowerCase().includes(q)||String(s.artist||"").toLowerCase().includes(q)
+ ).sort((a,b)=>String(a[1].title||a[0]).localeCompare(String(b[1].title||b[0])));
+ if(!list.length){box.innerHTML='<div class="text-center py-16 text-[var(--muted)] text-xs">NO EXPERIMENTS FOUND...</div>';return}
+ box.innerHTML=list.map(([k,s],i)=>{const a=accents[i%accents.length];return `
+ <article class="card rounded-md p-5 sm:p-6" style="--accent:${a}">
+  <div class="flex flex-col sm:flex-row sm:items-center gap-5">
+   <div class="flex-1 min-w-0 pl-3">
+    <div class="flex items-center gap-3"><span style="color:${a}">◆</span><h2 class="pixel text-sm sm:text-base md:text-lg" style="color:${a}">${esc(s.title||k)}</h2></div>
+    <div class="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[10px] sm:text-xs text-[var(--muted)]">
+      <span>${esc(s.filename)}</span>${s.artist?`<span>@ ${esc(s.artist)}</span>`:""}${s.bpm?`<span>${esc(s.bpm)} BPM</span>`:""}
+    </div>
+   </div>
+   <div class="flex gap-2 sm:flex-col md:flex-row">
+    <a href="${esc(s.strudel_link)}" class="pixel-btn inline-flex justify-center px-5 py-2.5 text-[10px] sm:text-xs font-bold" style="color:${a}">▶ PLAY</a>
+    <button data-key="${esc(k)}" class="pixel-btn px-4 py-2.5 text-[10px] sm:text-xs text-[var(--cyan)]">↗ SHARE</button>
+   </div>
+  </div>
+ </article>`}).join("");
+ box.querySelectorAll("[data-key]").forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText(shortUrl(b.dataset.key));let o=b.textContent;b.textContent="✓ COPIED";setTimeout(()=>b.textContent=o,1200)}catch{prompt("Copy this link:",shortUrl(b.dataset.key))}});
 }
-
-function shortUrl(key) {
-  const url = new URL(window.location.href);
-  url.search = "";
-  url.hash = "";
-  url.searchParams.set("play", key);
-  return url.toString();
+async function load(){
+ try{const r=await fetch("songs.json",{cache:"no-store"});if(!r.ok)throw Error(r.status);songs=await r.json();const n=Object.keys(songs).length;status.innerHTML=`<span class="text-[var(--cyan)]">●</span> ${n} EXPERIMENT${n===1?"":"S"}`;render()}
+ catch(e){console.error(e);status.innerHTML='<span class="text-red-500">●</span> UNABLE TO LOAD SONGS.JSON'}
 }
-
-function renderSongs(filter = "") {
-  const query = filter.trim().toLowerCase();
-
-  const entries = Object.entries(songs)
-    .filter(([key, song]) => {
-      return (
-        key.includes(query) ||
-        song.title.toLowerCase().includes(query) ||
-        song.artist.toLowerCase().includes(query)
-      );
-    })
-    .sort((a, b) =>
-      a[1].title.localeCompare(b[1].title, "fr")
-    );
-
-  if (!entries.length) {
-    songsContainer.innerHTML = `
-      <div class="text-center py-16 text-slate-700">
-        no experiments found...
-      </div>
-    `;
-    return;
-  }
-
-  songsContainer.innerHTML = entries.map(([key, song]) => `
-    <article class="card bg-slate-950/60 border border-slate-800 rounded-xl p-5">
-      <div class="flex flex-col md:flex-row md:items-center gap-5">
-
-        <div class="flex-1 min-w-0">
-          <div class="flex items-center gap-3">
-            <span class="text-cyan-400 text-lg">♪</span>
-
-            <h2 class="text-white font-bold truncate">
-              ${escapeHtml(song.title)}
-            </h2>
-          </div>
-
-          <div class="mt-2 flex flex-wrap gap-3 text-xs text-slate-600">
-            <span>${escapeHtml(song.filename)}</span>
-
-            ${
-              song.artist
-                ? `<span class="text-purple-400">@ ${escapeHtml(song.artist)}</span>`
-                : ""
-            }
-
-            ${
-              song.bpm
-                ? `<span class="text-cyan-700">${escapeHtml(song.bpm)} BPM</span>`
-                : ""
-            }
-          </div>
-        </div>
-
-        <div class="flex gap-2">
-
-          <a
-            href="${escapeHtml(song.strudel_link)}"
-            class="
-              px-5 py-2.5 rounded-lg
-              bg-cyan-400 hover:bg-cyan-300
-              text-slate-950 font-bold text-xs
-              transition
-              shadow-[0_0_15px_rgba(34,211,238,.25)]
-            "
-          >
-            ▶ PLAY
-          </a>
-
-          <button
-            data-key="${escapeHtml(key)}"
-            class="
-              px-4 py-2.5 rounded-lg
-              border border-slate-700
-              hover:border-cyan-500 hover:text-cyan-400
-              text-slate-500 text-xs transition
-            "
-            title="Copy short link"
-          >
-            🔗
-          </button>
-
-        </div>
-      </div>
-    </article>
-  `).join("");
-
-  songsContainer.querySelectorAll("button[data-key]").forEach(button => {
-    button.addEventListener("click", async () => {
-      const key = button.dataset.key;
-
-      try {
-        await navigator.clipboard.writeText(shortUrl(key));
-        const original = button.textContent;
-        button.textContent = "COPIED!";
-
-        setTimeout(() => {
-          button.textContent = original;
-        }, 1200);
-      } catch {
-        window.prompt("Copy this link:", shortUrl(key));
-      }
-    });
-  });
+async function route(){
+ const k=new URLSearchParams(location.search).get("play");if(!k)return false;
+ try{const r=await fetch("songs.json",{cache:"no-store"});if(!r.ok)throw Error();const c=await r.json();if(!c[k]?.strudel_link)throw Error();location.replace(c[k].strudel_link);return true}
+ catch{document.body.innerHTML='<main class="min-h-screen grid place-items-center"><div class="text-center font-mono"><div class="text-red-500 text-xl mb-4">ERROR 404</div><p class="text-[var(--muted)]">EXPERIMENT NOT FOUND</p><a href="'+location.pathname+'" class="inline-block mt-6 text-[var(--cyan)]">← BACK</a></div></main>';return true}
 }
-
-async function loadCatalogue() {
-  try {
-    const response = await fetch("songs.json", {
-      cache: "no-store"
-    });
-
-    if (!response.ok) {
-      throw new Error(`songs.json: HTTP ${response.status}`);
-    }
-
-    songs = await response.json();
-
-    const count = Object.keys(songs).length;
-
-    statusElement.innerHTML =
-      `<span class="text-cyan-400">●</span> ${count} experiment${count > 1 ? "s" : ""}`;
-
-    renderSongs();
-
-  } catch (error) {
-    console.error(error);
-
-    statusElement.innerHTML = `
-      <span class="text-red-400">●</span>
-      unable to load songs.json
-    `;
-  }
-}
-
-async function handlePlayRoute() {
-  const params = new URLSearchParams(window.location.search);
-  const key = params.get("play");
-
-  if (!key) {
-    return false;
-  }
-
-  try {
-    const response = await fetch("songs.json", {
-      cache: "no-store"
-    });
-
-    if (!response.ok) {
-      throw new Error("songs.json unavailable");
-    }
-
-    const catalogue = await response.json();
-    const song = catalogue[key];
-
-    if (!song) {
-      throw new Error(`Unknown experiment: ${key}`);
-    }
-
-    window.location.replace(song.strudel_link);
-    return true;
-
-  } catch (error) {
-    console.error(error);
-
-    document.body.innerHTML = `
-      <main class="min-h-screen flex items-center justify-center p-8">
-        <div class="text-center">
-          <div class="text-red-400 text-2xl mb-4">ERROR</div>
-
-          <p class="text-slate-500">
-            Experiment not found.
-          </p>
-
-          <a
-            href="${escapeHtml(window.location.pathname)}"
-            class="inline-block mt-6 text-cyan-400 hover:text-cyan-300"
-          >
-            ← back
-          </a>
-        </div>
-      </main>
-    `;
-
-    return true;
-  }
-}
-
-searchInput.addEventListener("input", () => {
-  renderSongs(searchInput.value);
-});
-
-(async () => {
-  const redirected = await handlePlayRoute();
-
-  if (!redirected) {
-    await loadCatalogue();
-  }
-})();
+function theme(t){document.documentElement.dataset.theme=t;localStorage.setItem("strudel-theme",t);updateSwitch()}
+function updateSwitch(){document.getElementById("light").classList.toggle("active",document.documentElement.dataset.theme==="light");document.getElementById("dark").classList.toggle("active",document.documentElement.dataset.theme!=="light")}
+document.getElementById("light").onclick=()=>theme("light");document.getElementById("dark").onclick=()=>theme("dark");search.oninput=()=>render(search.value);updateSwitch();
+(async()=>{if(!(await route()))await load()})();
 </script>
-
 </body>
 </html>
