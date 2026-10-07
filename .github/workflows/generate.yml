@@ -3,8 +3,7 @@ name: Generate Strudel catalogue
 on:
   push:
     paths:
-      - "rave/*.js"
-      - "smooth/*.js"
+      - "strudel/*.js"
       - "generate.py"
       - ".github/workflows/generate.yml"
   workflow_dispatch:
